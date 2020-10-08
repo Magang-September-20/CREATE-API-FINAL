@@ -5,7 +5,8 @@
  */
 package com.MII.APIfinal.services;
 
-import com.MII.APIfinal.services.rest.DataOutputLogin;
+import com.MII.APIfinal.entities.Account;
+import com.MII.APIfinal.entities.TestOutputLogin;
 import com.MII.APIfinal.others.BCrypt;
 import com.MII.APIfinal.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,19 @@ public class AccountService {
     @Autowired
     AccountRepository repository;
 
-    public DataOutputLogin login(String username, String password) {
-        DataOutputLogin outputLogin = new DataOutputLogin();
+    public TestOutputLogin login(String username, String password) {
+        String hashedPassword = repository.getPasswordByUsername(username);
+        String verification = null;
+        TestOutputLogin outputLogin = new TestOutputLogin();
         
-        if (BCrypt.checkpw(password, repository.getPasswordByUsername(username))) {
+        if (BCrypt.checkpw(password, hashedPassword)) {
             outputLogin.setAccount(repository.getAccount(username));
-            outputLogin.setStatus("success");
+            verification = "Login berhasil";
         } else {
-            outputLogin.setStatus("failed");
+            verification = "login gagal";
         }
+
+        outputLogin.setVerification(verification);
 
         return outputLogin;
     }
