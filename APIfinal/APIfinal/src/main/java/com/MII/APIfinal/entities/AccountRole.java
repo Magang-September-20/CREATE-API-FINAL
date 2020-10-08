@@ -5,6 +5,9 @@
  */
 package com.MII.APIfinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -35,9 +38,11 @@ public class AccountRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @JsonBackReference
     @JoinColumn(name = "account", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Account account;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @JoinColumn(name = "role", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Role role;

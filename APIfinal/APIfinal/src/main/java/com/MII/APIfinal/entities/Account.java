@@ -5,6 +5,8 @@
  */
 package com.MII.APIfinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -41,8 +43,10 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
     private List<AccountRole> accountRoleList;
+    @JsonIgnore
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
@@ -53,7 +57,7 @@ public class Account implements Serializable {
     public Account(Integer id) {
         this.id = id;
     }
-
+    
     public Account(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
