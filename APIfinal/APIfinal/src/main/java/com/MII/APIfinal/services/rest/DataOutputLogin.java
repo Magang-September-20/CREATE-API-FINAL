@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.MII.APIfinal.entities;
+package com.MII.APIfinal.services.rest;
 
+import com.MII.APIfinal.entities.Account;
 import lombok.Data;
 
 /**
@@ -12,17 +13,17 @@ import lombok.Data;
  * @author cadiize
  */
 @Data
-public class TestOutputLogin {
+public class DataOutputLogin {
     
     private Account account;
-    private String verification;
+    private String status;
 
-    public TestOutputLogin(Account account, String verification) {
+    public DataOutputLogin(Account account, String verification) {
         this.account = account;
-        this.verification = verification;
+        this.status = verification;
     }
 
-    public TestOutputLogin() {
+    public DataOutputLogin() {
     }
     
 }

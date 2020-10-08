@@ -5,6 +5,7 @@
  */
 package com.MII.APIfinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,12 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author sweje
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
@@ -41,6 +46,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
+    @JsonIgnore 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Account account;
 
@@ -57,61 +63,4 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.MII.APIfinal.entities.User[ id=" + id + " ]";
-    }
-    
 }
