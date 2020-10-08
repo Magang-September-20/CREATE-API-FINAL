@@ -5,6 +5,7 @@
  */
 package com.MII.APIfinal.services.rest;
 
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -12,18 +13,17 @@ import lombok.Data;
  * @author cadiize
  */
 @Data
-public class DataOutputLogin {
-    
-    private UserOutputLogin user;
-    private String status;
+public class UserOutputLogin {
 
-    public DataOutputLogin(UserOutputLogin user, String status) {
-        this.user = user;
-        this.status = status;
-    }
+    int id;
+    String name, email;
+    List<String> roles;
 
-    public DataOutputLogin() {
-        
+    public UserOutputLogin(int id, String name, String email, List<String> roles) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.roles = roles;
     }
     
 }

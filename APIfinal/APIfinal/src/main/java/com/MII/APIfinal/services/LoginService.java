@@ -6,10 +6,15 @@
 package com.MII.APIfinal.services;
 
 import com.MII.APIfinal.entities.Account;
+import com.MII.APIfinal.entities.User;
+import com.MII.APIfinal.entities.UserRole;
 import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.others.BCrypt;
 import com.MII.APIfinal.repositories.AccountRepository;
 import com.MII.APIfinal.repositories.UserRepository;
+import com.MII.APIfinal.services.rest.UserOutputLogin;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +37,30 @@ public class LoginService {
         if (account == null) {
             return new DataOutputLogin(null, "failed");
         }
-        
+
         if (BCrypt.checkpw(password, account.getPassword())) {
-            outputLogin.setUser(userRepository.findById(account.getId()).get());
+            User user = userRepository.findById(account.getId()).get();
+            UserOutputLogin userOutputLogin = new UserOutputLogin(user.getId(),
+                    user.getName(),
+                    user.getEmail(),
+                    getStringRoles(user.getUserRoleList()));
+            outputLogin.setUser(userOutputLogin);
             outputLogin.setStatus("success");
         } else {
             outputLogin.setStatus("failed");
         }
 
         return outputLogin;
+    }
+    
+    private static List<String> getStringRoles(List<UserRole> userRoles){
+        List<String> strings = new ArrayList<>();
+        
+        for (UserRole userRole : userRoles) {
+            strings.add(userRole.getRole().getName());
+        }
+        
+        return strings;
     }
 
 }
