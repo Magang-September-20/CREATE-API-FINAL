@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
     
-    @Query(value = "SELECT `id`, `username` FROM `account` WHERE `username` = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM `account` WHERE `username` = ?1", nativeQuery = true)
     public Account getAccount(String username);
     
     @Query(value = "SELECT `password` FROM `account` WHERE `username` = ?1", nativeQuery = true)
