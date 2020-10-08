@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.MII.APIfinal.entities;
+package com.MII.APIfinal.services.rest;
 
 import lombok.Data;
 
@@ -12,12 +12,8 @@ import lombok.Data;
  * @author cadiize
  */
 @Data
-public class TestInputLogin {
+public class DataInputLogin {
+    
     private String username,password;
 
-//    public TestInputLogin(String username, String password) {
-//        this.username = username;
-//        this.password = password;
-//    }
-    
 }
