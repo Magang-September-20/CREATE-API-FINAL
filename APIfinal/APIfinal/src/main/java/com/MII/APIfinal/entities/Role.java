@@ -5,7 +5,7 @@
  */
 package com.MII.APIfinal.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -23,7 +23,7 @@ import lombok.Setter;
 
 /**
  *
- * @author sweje
+ * @author cadiize
  */
 @Entity
 @Getter
@@ -41,9 +41,9 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
-    private List<AccountRole> accountRoleList;
+    private List<UserRole> userRoleList;
 
     public Role() {
     }

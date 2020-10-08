@@ -5,12 +5,11 @@
  */
 package com.MII.APIfinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -26,7 +24,7 @@ import lombok.Setter;
 
 /**
  *
- * @author sweje
+ * @author cadiize
  */
 @Entity
 @Getter
@@ -44,13 +42,13 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<AccountRole> accountRoleList;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private User user;
+    @Basic(optional = false)
+    @Column(name = "password")
+    private String password;
+//    @JsonBackReference
+//    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+//    @OneToOne(optional = false, fetch = FetchType.LAZY)
+//    private User user;
 
     public Account() {
     }
@@ -58,11 +56,11 @@ public class Account implements Serializable {
     public Account(Integer id) {
         this.id = id;
     }
-    
-    public Account(Integer id, String username) {
+
+    public Account(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
-//        this.password = password;
+        this.password = password;
     }
     
 }

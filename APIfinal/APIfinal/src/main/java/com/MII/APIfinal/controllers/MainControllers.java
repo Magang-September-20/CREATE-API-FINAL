@@ -7,7 +7,9 @@ package com.MII.APIfinal.controllers;
 
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.rest.DataOutputLogin;
-import com.MII.APIfinal.services.AccountService;
+import com.MII.APIfinal.services.LoginService;
+import com.MII.APIfinal.services.RegisterService;
+import com.MII.APIfinal.services.rest.DataInputRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,11 +23,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainControllers {
 
     @Autowired
-    AccountService accountService;
+    LoginService loginService;
+
+    @Autowired
+    RegisterService registerService;
 
     @PostMapping("/login")
     public DataOutputLogin login(@RequestBody DataInputLogin inputLogin) {
-        return accountService.login(inputLogin.getUsername(), inputLogin.getPassword());
+        return loginService.login(inputLogin.getUsername(), inputLogin.getPassword());
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody DataInputRegister inputRegister) {
+        return registerService.register(inputRegister.getName(),
+                inputRegister.getEmail(),
+                inputRegister.getUsername(),
+                inputRegister.getPassword()
+        );
     }
     
 }

@@ -5,7 +5,6 @@
  */
 package com.MII.APIfinal.services.rest;
 
-import com.MII.APIfinal.entities.User;
 import lombok.Data;
 
 /**
@@ -13,17 +12,8 @@ import lombok.Data;
  * @author cadiize
  */
 @Data
-public class DataOutputLogin {
+public class DataInputRegister {
     
-    private User user;
-    private String status;
-
-    public DataOutputLogin(User user, String status) {
-        this.user = user;
-        this.status = status;
-    }
-
-    public DataOutputLogin() {
-    }
+    String name, email, username, password;
     
 }
