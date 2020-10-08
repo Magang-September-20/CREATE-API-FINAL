@@ -8,6 +8,7 @@ public class ApIfinalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApIfinalApplication.class, args);
+                System.out.println("====== jalan gaes ======");
 	}
 
 }
