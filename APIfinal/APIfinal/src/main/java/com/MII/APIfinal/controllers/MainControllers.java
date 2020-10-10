@@ -5,11 +5,14 @@
  */
 package com.MII.APIfinal.controllers;
 
+import com.MII.APIfinal.entities.Account;
+import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +31,11 @@ public class MainControllers {
     @Autowired
     RegisterService registerService;
 
+    @PostMapping("/getAll")
+    public List<User> getAll() {
+        return loginService.getAllUser();
+    }
+    
     @PostMapping("/login")
     public DataOutputLogin login(@RequestBody DataInputLogin inputLogin) {
         return loginService.login(inputLogin.getUsername(), inputLogin.getPassword());

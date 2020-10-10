@@ -62,5 +62,9 @@ public class LoginService {
         
         return strings;
     }
+    
+    public List<User> getAllUser(){
+        return userRepository.getAll();
+    }
 
 }
