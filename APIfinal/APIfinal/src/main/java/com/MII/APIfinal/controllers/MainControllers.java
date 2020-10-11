@@ -5,12 +5,17 @@
  */
 package com.MII.APIfinal.controllers;
 
+import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
+import com.MII.APIfinal.services.UserService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
+import com.MII.APIfinal.services.rest.UserOutputLogin;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +32,9 @@ public class MainControllers {
 
     @Autowired
     RegisterService registerService;
+    
+    @Autowired
+    UserService userService;
 
     @PostMapping("/login")
     public DataOutputLogin login(@RequestBody DataInputLogin inputLogin) {
@@ -40,6 +48,11 @@ public class MainControllers {
                 inputRegister.getUsername(),
                 inputRegister.getPassword()
         );
+    }
+    
+    @GetMapping("/getAll")
+    public List<UserOutputLogin> getAll(){
+        return userService.getAll();
     }
     
 }

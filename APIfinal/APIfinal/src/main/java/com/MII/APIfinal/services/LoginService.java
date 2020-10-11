@@ -53,7 +53,7 @@ public class LoginService {
         return outputLogin;
     }
     
-    private static List<String> getStringRoles(List<UserRole> userRoles){
+    public static List<String> getStringRoles(List<UserRole> userRoles){
         List<String> strings = new ArrayList<>();
         
         for (UserRole userRole : userRoles) {
