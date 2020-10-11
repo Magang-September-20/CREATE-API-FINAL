@@ -12,6 +12,7 @@ import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
+import com.MII.APIfinal.services.rest.UserOutputLogin;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +33,8 @@ public class MainControllers {
     RegisterService registerService;
 
     @PostMapping("/getAll")
-    public List<User> getAll() {
-        return loginService.getAllUser();
+    public List<UserOutputLogin> getAll() {
+        return loginService.getAllUser2();
     }
     
     @PostMapping("/login")
