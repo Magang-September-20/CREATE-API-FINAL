@@ -13,13 +13,13 @@ import lombok.Data;
  * @author cadiize
  */
 @Data
-public class UserOutputLogin {
+public class UserOutput {
 
     int id;
     String name, email;
     List<String> roles;
 
-    public UserOutputLogin(int id, String name, String email, List<String> roles) {
+    public UserOutput(int id, String name, String email, List<String> roles) {
         this.id = id;
         this.name = name;
         this.email = email;

@@ -14,10 +14,10 @@ import lombok.Data;
 @Data
 public class DataOutputLogin {
     
-    private UserOutputLogin user;
+    private UserOutput user;
     private String status;
 
-    public DataOutputLogin(UserOutputLogin user, String status) {
+    public DataOutputLogin(UserOutput user, String status) {
         this.user = user;
         this.status = status;
     }

@@ -12,7 +12,7 @@ import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.others.BCrypt;
 import com.MII.APIfinal.repositories.AccountRepository;
 import com.MII.APIfinal.repositories.UserRepository;
-import com.MII.APIfinal.services.rest.UserOutputLogin;
+import com.MII.APIfinal.services.rest.UserOutput;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class LoginService {
 
         if (BCrypt.checkpw(password, account.getPassword())) {
             User user = userRepository.findById(account.getId()).get();
-            UserOutputLogin userOutputLogin = new UserOutputLogin(user.getId(),
+            UserOutput userOutputLogin = new UserOutput(user.getId(),
                     user.getName(),
                     user.getEmail(),
                     getStringRoles(user.getUserRoleList()));
