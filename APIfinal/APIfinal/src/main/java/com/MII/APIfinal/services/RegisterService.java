@@ -37,6 +37,7 @@ public class RegisterService {
     RoleRepository roleRepository;
     
     public String register(String name, String email, String username, String password){
+        
         if(accountRepository.getAccountByUsername(username) == null && accountRepository.getAccountByEmail(email) == null){
             //save user
             User newUser = userRepository.save(new User(0, name, email));

@@ -6,10 +6,10 @@
 package com.MII.APIfinal.controllers;
 
 import com.MII.APIfinal.services.rest.DataInputLogin;
-import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +29,7 @@ public class MainControllers {
     RegisterService registerService;
 
     @PostMapping("/login")
-    public DataOutputLogin login(@RequestBody DataInputLogin inputLogin) {
+    public Map<String, Object> login(@RequestBody DataInputLogin inputLogin) {
         return loginService.login(inputLogin.getUsername(), inputLogin.getPassword());
     }
 

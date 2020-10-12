@@ -8,13 +8,14 @@ package com.MII.APIfinal.services;
 import com.MII.APIfinal.entities.Account;
 import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.entities.UserRole;
-import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.others.BCrypt;
 import com.MII.APIfinal.repositories.AccountRepository;
 import com.MII.APIfinal.repositories.UserRepository;
-import com.MII.APIfinal.services.rest.UserOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,36 +31,43 @@ public class LoginService {
     @Autowired
     UserRepository userRepository;
 
-    public DataOutputLogin login(String username, String password) {
-        DataOutputLogin outputLogin = new DataOutputLogin();
+    public Map<String, Object> login(String username, String password) {
+
+        Map<String, Object> outputLogin = new HashMap<>();
         Account account = accountRepository.getAccountByUsername(username);
 
-        if (account == null) {
-            return new DataOutputLogin(null, "failed");
-        }
+        // check if username not found
+        if (account != null) {
+            // check password
+            if (BCrypt.checkpw(password, account.getPassword())) {
+                User user = userRepository.findById(account.getId()).get();
+                Map<String, Object> outputUser = new LinkedHashMap<>();
 
-        if (BCrypt.checkpw(password, account.getPassword())) {
-            User user = userRepository.findById(account.getId()).get();
-            UserOutput userOutputLogin = new UserOutput(user.getId(),
-                    user.getName(),
-                    user.getEmail(),
-                    getStringRoles(user.getUserRoleList()));
-            outputLogin.setUser(userOutputLogin);
-            outputLogin.setStatus("success");
+                outputUser.put("id", user.getId());
+                outputUser.put("name", user.getName());
+                outputUser.put("email", user.getEmail());
+                outputUser.put("roles", getStringRoles(user.getUserRoleList()));
+
+                outputLogin.put("user", outputUser);
+                outputLogin.put("status", "success");
+            } else {
+                outputLogin.put("status", "wrong password");
+            }
         } else {
-            outputLogin.setStatus("failed");
+            outputLogin.put("status", "username not found");
         }
 
         return outputLogin;
     }
-    
-    private static List<String> getStringRoles(List<UserRole> userRoles){
-        List<String> strings = new ArrayList<>();
+
+    private static List<String> getStringRoles(List<UserRole> userRoles) {
         
+        List<String> strings = new ArrayList<>();
+
         for (UserRole userRole : userRoles) {
             strings.add(userRole.getRole().getName());
         }
-        
+
         return strings;
     }
 
