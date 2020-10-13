@@ -5,8 +5,6 @@
  */
 package com.MII.APIfinal.controllers;
 
-import com.MII.APIfinal.entities.Account;
-import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
