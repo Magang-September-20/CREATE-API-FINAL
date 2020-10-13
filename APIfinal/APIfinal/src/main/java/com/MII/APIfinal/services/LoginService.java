@@ -63,7 +63,8 @@ public class LoginService {
         return strings;
     }
     
-     public List<UserOutputLogin> getAllUser2(){
+
+    public List<UserOutputLogin> getAllUser2(){
         List<UserOutputLogin> userOutputLogins = new ArrayList<>();
         List<User> users = userRepository.getAll();
         
