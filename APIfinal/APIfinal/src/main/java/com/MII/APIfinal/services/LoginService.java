@@ -11,6 +11,7 @@ import com.MII.APIfinal.entities.UserRole;
 import com.MII.APIfinal.others.BCrypt;
 import com.MII.APIfinal.repositories.AccountRepository;
 import com.MII.APIfinal.repositories.UserRepository;
+import com.MII.APIfinal.services.rest.UserGetAll;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -70,5 +71,19 @@ public class LoginService {
 
         return strings;
     }
-
+    public List<UserGetAll> getAllUser(){
+        List<UserGetAll> userOutputLogins = new ArrayList<>();
+        List<User> users = userRepository.getAll();
+        
+        for (User user : users) {
+            UserGetAll outputLogin = new UserGetAll(
+                    user.getId(),
+                    user.getName(),
+                    user.getEmail(),
+                    getStringRoles(user.getUserRoleList())
+            );
+            userOutputLogins.add(outputLogin);
+        }
+        return userOutputLogins;
+    }
 }
