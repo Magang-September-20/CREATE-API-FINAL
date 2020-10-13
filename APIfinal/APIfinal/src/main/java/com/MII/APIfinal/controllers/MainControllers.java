@@ -31,11 +31,6 @@ public class MainControllers {
     @Autowired
     RegisterService registerService;
 
-    @PostMapping("/getAll")
-    public List<UserOutputLogin> getAll() {
-        return loginService.getAllUser2();
-    }
-    
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody DataInputLogin inputLogin) {
         return loginService.login(inputLogin.getUsername(), inputLogin.getPassword());
