@@ -10,6 +10,7 @@ import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
+import com.MII.APIfinal.services.rest.DataOutputRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +35,9 @@ public class MainControllers {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody DataInputRegister inputRegister) {
-        return registerService.register(inputRegister.getName(),
+    public DataOutputRegister register(@RequestBody DataInputRegister inputRegister) {
+        return registerService.register(
+                inputRegister.getName(),
                 inputRegister.getEmail(),
                 inputRegister.getUsername(),
                 inputRegister.getPassword()

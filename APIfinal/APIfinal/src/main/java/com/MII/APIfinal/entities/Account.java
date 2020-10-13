@@ -57,10 +57,10 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(Integer id, String username, String password) {
+    public Account(Integer id, String username, String pass) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.password = pass;
     }
     
 }
