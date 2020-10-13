@@ -16,6 +16,6 @@ import org.springframework.data.jpa.repository.Query;
  * @author cadiize
  */
 public interface UserRepository extends JpaRepository<User, Integer>{
-    @Query(value="SELECT * FROM user", nativeQuery = true)
+    @Query(value = "SELECT * FROM user",nativeQuery = true)
     public List<User> getAll();
 }

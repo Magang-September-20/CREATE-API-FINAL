@@ -6,13 +6,14 @@
 package com.MII.APIfinal.controllers;
 
 import com.MII.APIfinal.services.rest.DataInputLogin;
-import com.MII.APIfinal.services.rest.DataOutputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
-import com.MII.APIfinal.services.rest.UserOutputLogin;
+import com.MII.APIfinal.services.rest.UserGetAll;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +37,13 @@ public class MainControllers {
     }
     
     @PostMapping("/login")
-    public DataOutputLogin login(@RequestBody DataInputLogin inputLogin) {
+    public Map<String, Object> login(@RequestBody DataInputLogin inputLogin) {
         return loginService.login(inputLogin.getUsername(), inputLogin.getPassword());
+    }
+    
+    @GetMapping("/getAll")
+    public List<UserGetAll> getAll() {
+        return loginService.getAllUser();
     }
 
     @PostMapping("/register")
