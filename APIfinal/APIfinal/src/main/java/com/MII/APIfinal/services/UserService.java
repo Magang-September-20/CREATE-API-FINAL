@@ -44,6 +44,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public int getId(String email) {
+        return userRepository.getId(email);
+    }
+    
     private static List<String> getStringRoles(List<UserRole> userRoles) {
         List<String> strings = new ArrayList<>();
 

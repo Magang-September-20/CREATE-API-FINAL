@@ -6,6 +6,8 @@
 package com.MII.APIfinal.controllers;
 
 import com.MII.APIfinal.entities.User;
+import com.MII.APIfinal.entities.UserRole;
+import com.MII.APIfinal.services.UserRoleService;
 import com.MII.APIfinal.services.UserService;
 import com.MII.APIfinal.services.rest.DataOutputUser;
 import java.util.List;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user/")
 public class UserController {
     @Autowired UserService userService;
+    @Autowired UserRoleService userRoleService;
     
     @CrossOrigin(origins = "http://localhost:8089")
     @GetMapping("getAll")
@@ -41,6 +44,16 @@ public class UserController {
     @PostMapping("save")
     public User save(@RequestBody User user){
         return userService.save(user);
+    }
+    
+    @GetMapping("getId/{email}")
+    public int getById(@PathVariable("email") String email){
+        return userService.getId(email);
+    }
+    
+    @GetMapping("getRole/{id}")
+    public List<String> getRole(@PathVariable("id") int id){
+        return userService.getById(id).getUser().getRoles();
     }
     
 }
