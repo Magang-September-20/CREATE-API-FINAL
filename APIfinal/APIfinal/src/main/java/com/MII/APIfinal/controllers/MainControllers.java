@@ -5,6 +5,7 @@
  */
 package com.MII.APIfinal.controllers;
 
+import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
@@ -42,7 +43,7 @@ public class MainControllers {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody DataInputRegister inputRegister) {
+    public User register(@RequestBody DataInputRegister inputRegister) {
         return registerService.register(inputRegister.getName(),
                 inputRegister.getEmail(),
                 inputRegister.getUsername(),

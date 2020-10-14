@@ -36,7 +36,7 @@ public class RegisterService {
     @Autowired
     RoleRepository roleRepository;
     
-    public String register(String name, String email, String username, String password){
+    public User register(String name, String email, String username, String password){
         
         if(accountRepository.getAccountByUsername(username) == null && accountRepository.getAccountByEmail(email) == null){
             //save user
@@ -47,10 +47,10 @@ public class RegisterService {
 
             //save role
             userRoleRepository.save(new UserRole(newUser.getId(), newUser, new Role(4)));
-            return "Register Success";
+            return newUser;
         }
         else{
-            return "Register Failed";
+            return null;
         }
     }
     
