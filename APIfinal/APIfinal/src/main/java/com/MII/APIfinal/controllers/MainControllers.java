@@ -9,6 +9,7 @@ import com.MII.APIfinal.entities.User;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
+import com.MII.APIfinal.services.UserService;
 import com.MII.APIfinal.services.rest.DataInputRegister;
 import com.MII.APIfinal.services.rest.UserGetAll;
 import java.util.List;
@@ -31,6 +32,8 @@ public class MainControllers {
 
     @Autowired
     RegisterService registerService;
+    @Autowired
+    UserService userService;
 
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody DataInputLogin inputLogin) {
@@ -40,6 +43,14 @@ public class MainControllers {
     @GetMapping("/getAll")
     public List<UserGetAll> getAll() {
         return loginService.getAllUser();
+    }
+    @GetMapping("/getEmployees")
+    public List<UserGetAll> getEmployee() {
+        return userService.getEmployee();
+    }
+    @GetMapping("/getUser")
+    public List<UserGetAll> getUser() {
+        return userService.getUser();
     }
 
     @PostMapping("/register")
