@@ -52,6 +52,10 @@ public class MainControllers {
     public List<UserGetAll> getUser() {
         return userService.getUser();
     }
+    @GetMapping("/getHr")
+    public List<UserGetAll> getHr() {
+        return userService.getHr();
+    }
 
     @PostMapping("/register")
     public User register(@RequestBody DataInputRegister inputRegister) {

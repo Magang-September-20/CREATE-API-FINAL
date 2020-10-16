@@ -79,4 +79,19 @@ public class UserService {
         }
         return userOutputLogins;
     }
+    public List<UserGetAll> getHr(){
+        List<UserGetAll> userOutputLogins = new ArrayList<>();
+        List<User> users = userRepository.getHr();
+        
+        for (User user : users) {
+            UserGetAll outputLogin = new UserGetAll(
+                    user.getId(),
+                    user.getName(),
+                    user.getEmail(),
+                    getStringRoles(user.getUserRoleList())
+            );
+            userOutputLogins.add(outputLogin);
+        }
+        return userOutputLogins;
+    }
 }
