@@ -56,6 +56,10 @@ public class MainControllers {
     public List<UserGetAll> getHr() {
         return userService.getHr();
     }
+    @GetMapping("/countUser")
+    public int countUser() {
+        return userService.countUser();
+    }
 
     @PostMapping("/register")
     public User register(@RequestBody DataInputRegister inputRegister) {

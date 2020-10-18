@@ -94,4 +94,8 @@ public class UserService {
         }
         return userOutputLogins;
     }
+    
+    public int countUser(){
+    return userRepository.countUser();
+    }
 }
