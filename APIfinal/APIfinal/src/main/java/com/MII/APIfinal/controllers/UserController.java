@@ -33,7 +33,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:8089")
     @GetMapping("getAll")
     public List<User> getAll(){
-        return  userService.getAll();
+        return userService.getAll();
     }
     
     @GetMapping("getById/{id}")
