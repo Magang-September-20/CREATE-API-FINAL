@@ -6,9 +6,11 @@
 package com.MII.APIfinal.controllers;
 
 import com.MII.APIfinal.entities.User;
+import com.MII.APIfinal.services.ChangePasswordService;
 import com.MII.APIfinal.services.rest.DataInputLogin;
 import com.MII.APIfinal.services.LoginService;
 import com.MII.APIfinal.services.RegisterService;
+import com.MII.APIfinal.services.rest.DataInputChangePassword;
 import com.MII.APIfinal.services.rest.DataInputRegister;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class MainControllers {
 
     @Autowired
     RegisterService registerService;
+    
+    @Autowired
+    ChangePasswordService changePasswordService;
 
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody DataInputLogin inputLogin) {
@@ -43,4 +48,8 @@ public class MainControllers {
         );
     }
     
+    @PostMapping("/change_password")
+    public String changePassword(@RequestBody DataInputChangePassword inputChangePassword){
+        return changePasswordService.changePassword(inputChangePassword.getId(), inputChangePassword.oldPassword, inputChangePassword.newPassword);
+    }
 }
