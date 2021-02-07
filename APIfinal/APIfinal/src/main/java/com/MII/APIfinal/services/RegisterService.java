@@ -14,6 +14,7 @@ import com.MII.APIfinal.repositories.AccountRepository;
 import com.MII.APIfinal.repositories.RoleRepository;
 import com.MII.APIfinal.repositories.UserRepository;
 import com.MII.APIfinal.repositories.UserRoleRepository;
+import com.MII.APIfinal.services.rest.DataOutputRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,21 +24,22 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RegisterService {
-    
+
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     AccountRepository accountRepository;
-    
+
     @Autowired
     UserRoleRepository userRoleRepository;
-    
+
     @Autowired
     RoleRepository roleRepository;
-    
-    public String register(String name, String email, String username, String password){
-        if(accountRepository.getAccountByUsername(username) == null && accountRepository.getAccountByEmail(email) == null){
+
+    public DataOutputRegister register(String name, String email, String username, String password) {
+        DataOutputRegister outputRegister = new DataOutputRegister();
+        if (accountRepository.getAccountByUsername(username) == null && accountRepository.getAccountByEmail(email) == null) {
             //save user
             User newUser = userRepository.save(new User(0, name, email));
 
@@ -46,11 +48,11 @@ public class RegisterService {
 
             //save role
             userRoleRepository.save(new UserRole(newUser.getId(), newUser, new Role(4)));
-            return "Register Success";
+            outputRegister.setStatus("success");
+        } else {
+            outputRegister.setStatus("failed");
         }
-        else{
-            return "Register Failed";
-        }
+        return outputRegister;
     }
-    
+
 }

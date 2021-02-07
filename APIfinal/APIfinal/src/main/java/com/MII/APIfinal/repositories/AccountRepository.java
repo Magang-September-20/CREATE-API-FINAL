@@ -20,7 +20,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
     @Query(value = "SELECT * FROM `account` WHERE `username` = ?1", nativeQuery = true)
     public Account getAccountByUsername(String username);
     
-    @Query(value = "SELECT * FROM `account` WHERE `email` = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM `user` WHERE `email` = ?1", nativeQuery = true)
     public Account getAccountByEmail(String email);
     
 }
